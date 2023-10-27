@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,39 +22,27 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.purple[600],
           title: Text(
-            'texto',
+            'Tarefas',
           ),
         ),
-        body: Container(
-          child: Stack(
-            children: [
-              Container(
-                color: Colors.blue,
-                height: 140,
-              ),
-              Container(
-                color: Colors.white,
-                height: 100,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      color: Colors.black26,
-                      width: 72,
-                      height: 100,
-                    ),
-                    Text('Aprender Flutter', style: TextStyle(fontSize: 20)),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Icon(Icons.arrow_drop_up),
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
+        body: ListView(
+          scrollDirection: Axis.vertical,
+          children: [
+            Task('alguem me ajuda'),
+            Task('socorro'),
+            Task('preciso de tratamento'),
+            Task('porquê'),
+            Task('porquê'),
+            Task('porquê'),
+            Task('porquê'),
+            Task('porquê'),
+            Task('porquê'),
+            Task('porquê'),
+            Task('porquê'),
+            Task('porquê'),
+          ],
         ),
         floatingActionButton: FloatingActionButton(onPressed: () {}),
       ),
@@ -60,11 +50,81 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Caixa extends StatelessWidget {
-  const Caixa({Key? key}) : super(key: key);
+class Task extends StatefulWidget {
+  final String nome;
+  const Task(this.nome, {Key? key}) : super(key: key);
 
   @override
+  State<Task> createState() => _TaskState();
+}
+
+class _TaskState extends State<Task> {
+  int nivel = 0;
+  @override
   Widget build(BuildContext context) {
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        child: Stack(
+          children: [
+            Container(
+              color: Colors.purple[500],
+              height: 140,
+            ),
+            Column(
+              children: [
+                Container(
+                  color: Colors.white,
+                  height: 100,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        color: Colors.black26,
+                        width: 72,
+                        height: 100,
+                      ),
+                      Container(
+                          width: 200,
+                          child: Text(widget.nome,
+                              style: TextStyle(
+                                  overflow: TextOverflow.ellipsis,
+                                  fontSize: 24))),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            nivel++;
+                          });
+                        },
+                        child: Icon(Icons.arrow_drop_up),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 200,
+                        child: LinearProgressIndicator(
+                          color: Colors.amberAccent,
+                          value: nivel / 10,
+                        ),
+                      ),
+                      Text(
+                        'Nivel: $nivel',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
