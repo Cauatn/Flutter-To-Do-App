@@ -3,16 +3,23 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool opacidade = true;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Zezao',
+      title: '',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -20,23 +27,39 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Flutter: Meus primeiros passos',
+            'Flutter, nao fode',
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.blue,
         ),
-        body: ListView(
-          children: [
-            Task('Rezar',
-                'https://img.freepik.com/fotos-gratis/retrato-de-um-leao-gerado-por-ia_268835-4278.jpg?w=740&t=st=1699401574~exp=1699402174~hmac=cbb16e5b0a8c24ab8ef5e752acf14008c01c95bb7671f2544dda159166638b83'),
-            Task('Sofrimento', ''),
-            Task('Fé', '')
-          ],
+        body: AnimatedOpacity(
+          opacity: opacidade ? 1 : 0,
+          duration: Duration(milliseconds: 500),
+          child: ListView(
+            children: [
+              Task(
+                  'Rezar',
+                  'https://img.freepik.com/fotos-gratis/retrato-de-um-leao-gerado-por-ia_268835-4278.jpg?w=740&t=st=1699401574~exp=1699402174~hmac=cbb16e5b0a8c24ab8ef5e752acf14008c01c95bb7671f2544dda159166638b83',
+                  1),
+              Task(
+                  'Sofrimento',
+                  'https://media.kasperskydaily.com/wp-content/uploads/sites/94/2013/11/06144845/inferno.png',
+                  4),
+              Task(
+                  'Fé',
+                  'https://img.freepik.com/fotos-gratis/jovem-afro-americano-sentado-com-os-olhos-fechados-com-a-biblia-nas-maos_181624-24395.jpg?w=740&t=st=1699667219~exp=1699667819~hmac=4694625756f45c06a84071e31d1e550a270fd2acc1f4841c295625895a5749ab',
+                  3)
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: Colors.blue,
-        ),
+            onPressed: () {
+              setState(() {
+                opacidade = !opacidade;
+              });
+            },
+            backgroundColor: Colors.blue,
+            child: Icon(Icons.remove_red_eye)),
       ),
     );
   }
@@ -45,7 +68,8 @@ class MyApp extends StatelessWidget {
 class Task extends StatefulWidget {
   final String taskName;
   final String foto;
-  const Task(this.taskName, this.foto, {super.key});
+  final int dificuldade;
+  const Task(this.taskName, this.foto, this.dificuldade, {super.key});
 
   @override
   State<Task> createState() => _TaskState();
@@ -81,7 +105,7 @@ class _TaskState extends State<Task> {
                         Container(
                             width: 200,
                             child: LinearProgressIndicator(
-                              value: nivel / 10,
+                              value: ((nivel / widget.dificuldade) / 10),
                               color: Colors.white,
                               backgroundColor: Colors.white30,
                             )),
@@ -117,27 +141,37 @@ class _TaskState extends State<Task> {
                           Icon(
                             Icons.star,
                             size: 15,
-                            color: Colors.blue,
+                            color: (widget.dificuldade >= 1)
+                                ? Colors.blue
+                                : Colors.blue[100],
                           ),
                           Icon(
                             Icons.star,
                             size: 15,
-                            color: Colors.blue,
+                            color: (widget.dificuldade >= 2)
+                                ? Colors.blue
+                                : Colors.blue[100],
                           ),
                           Icon(
                             Icons.star,
                             size: 15,
-                            color: Colors.blue,
+                            color: (widget.dificuldade >= 3)
+                                ? Colors.blue
+                                : Colors.blue[100],
                           ),
                           Icon(
                             Icons.star,
                             size: 15,
-                            color: Colors.blue,
+                            color: (widget.dificuldade >= 4)
+                                ? Colors.blue
+                                : Colors.blue[100],
                           ),
                           Icon(
                             Icons.star,
                             size: 15,
-                            color: Colors.blue,
+                            color: (widget.dificuldade >= 5)
+                                ? Colors.blue
+                                : Colors.blue[100],
                           ),
                         ],
                       ),
