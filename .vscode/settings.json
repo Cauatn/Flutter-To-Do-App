@@ -1,0 +1,5 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "cmake.configureOnOpen": true,
+    "cmake.sourceDirectory": "C:/Users/tavar/source/projects_root/flutter_alura/linux"
+}
