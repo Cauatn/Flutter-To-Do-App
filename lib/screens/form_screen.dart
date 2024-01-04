@@ -63,7 +63,7 @@ class _FormScreenState extends State<FormScreen> {
                     child: TextFormField(
                       validator: (value) {
                         if (value!.isEmpty ||
-                            int.parse(value!) > 5 ||
+                            int.parse(value) > 5 ||
                             int.parse(value) < 1) {
                           return 'Insira uma dificuldade entre 1 e 5';
                         }

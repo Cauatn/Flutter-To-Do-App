@@ -8,9 +8,9 @@ class TaskInherited extends InheritedWidget {
   }) : super(child: child);
 
   final List<Task> taskList = [
-    Task('Rezar', 'assets/images/reza.jpg', 1),
-    Task('Sofrimento', 'assets/images/inferno.png', 4),
-    Task('Fé', 'assets/images/leao.jpg', 3),
+    const Task('Rezar', 'assets/images/reza.jpg', 1),
+    const Task('Sofrimento', 'assets/images/inferno.png', 4),
+    const Task('Fé', 'assets/images/leao.jpg', 3),
   ];
 
   static TaskInherited? of(BuildContext context) {
