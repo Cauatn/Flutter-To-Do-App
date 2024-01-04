@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../components/task.dart';
+import 'package:flutter_alura/data/task_inherited.dart';
+import 'package:flutter_alura/screens/form_screen.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -9,7 +10,6 @@ class InitialScreen extends StatefulWidget {
 }
 
 class _InitialScreenState extends State<InitialScreen> {
-  bool opacidade = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,25 +20,24 @@ class _InitialScreenState extends State<InitialScreen> {
         ),
         backgroundColor: Colors.blue,
       ),
-      body: AnimatedOpacity(
-        opacity: opacidade ? 1 : 0,
-        duration: const Duration(milliseconds: 500),
-        child: ListView(
-          children: const [
-            Task('Rezar', 'assets/images/reza.jpg', 1),
-            Task('Sofrimento', 'assets/images/inferno.png', 4),
-            Task('Fé', 'assets/images/leao.jpg', 3)
-          ],
-        ),
+      body: ListView(
+        children: TaskInherited.of(context)!.taskList,
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              opacidade = !opacidade;
-            });
-          },
-          backgroundColor: Colors.blue,
-          child: const Icon(Icons.remove_red_eye)),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (contextNew) => FormScreen(taskContext: context),
+            ),
+          );
+        },
+        backgroundColor: Colors.blue,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }

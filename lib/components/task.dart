@@ -78,16 +78,20 @@ class _TaskState extends State<Task> {
                   ],
                 ),
                 ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        nivel++;
-                      });
-                    },
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [Icon(Icons.arrow_drop_up), Text('UP')],
-                    ))
+                  onPressed: () {
+                    setState(() {
+                      nivel++;
+                    });
+                  },
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(Icons.arrow_drop_up),
+                      Text('UP'),
+                    ],
+                  ),
+                )
               ],
             )
           ],
