@@ -8,10 +8,19 @@ class TaskInherited extends InheritedWidget {
   }) : super(child: child);
 
   final List<Task> taskList = [
-    const Task('Rezar', 'assets/images/reza.jpg', 1),
-    const Task('Sofrimento', 'assets/images/inferno.png', 4),
-    const Task('Fé', 'assets/images/leao.jpg', 3),
+    Task('Rezar', 'assets/images/reza.jpg', 3),
+    Task('Sofrimento', 'assets/images/inferno.png', 4),
+    Task('Fé', 'assets/images/leao.jpg', 3),
   ];
+
+  double abc() {
+    double total = 0;
+
+    for (int i = 0; i < taskList.length; i++) {
+      total += taskList[i].nivel * (taskList[i].dificuldade / 1);
+    }
+    return total;
+  }
 
   static TaskInherited? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<TaskInherited>();

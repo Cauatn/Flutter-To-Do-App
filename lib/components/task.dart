@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_alura/data/task_inherited.dart';
 import 'difficulty.dart';
 
 class Task extends StatefulWidget {
   final String taskName;
   final String foto;
   final int dificuldade;
-  const Task(this.taskName, this.foto, this.dificuldade, {super.key});
-
+  Task(this.taskName, this.foto, this.dificuldade, {super.key});
+  int nivel = 0;
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
-  int nivel = 0;
+  bool assetOrNetwork() {
+    if (widget.foto.contains('http')) return false;
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +44,12 @@ class _TaskState extends State<Task> {
                       SizedBox(
                           width: 200,
                           child: LinearProgressIndicator(
-                            value: ((nivel / widget.dificuldade) / 10),
+                            value: ((widget.nivel / widget.dificuldade) / 10),
                             color: Colors.white,
                             backgroundColor: Colors.white30,
                           )),
                       Text(
-                        'Nivel: $nivel',
+                        'Nivel: ${widget.nivel}',
                         style:
                             const TextStyle(fontSize: 16, color: Colors.white),
                       ),
@@ -61,10 +65,13 @@ class _TaskState extends State<Task> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                    color: Colors.black26,
-                    height: 100,
-                    width: 80,
-                    child: Image.asset(widget.foto, fit: BoxFit.fill)),
+                  color: Colors.black26,
+                  height: 100,
+                  width: 80,
+                  child: assetOrNetwork()
+                      ? Image.asset(widget.foto, fit: BoxFit.cover)
+                      : Image.network(widget.foto, fit: BoxFit.cover),
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -80,7 +87,7 @@ class _TaskState extends State<Task> {
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      nivel++;
+                      widget.nivel++;
                     });
                   },
                   child: const Column(
