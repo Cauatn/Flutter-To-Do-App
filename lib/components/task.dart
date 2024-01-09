@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_alura/data/task_inherited.dart';
 import 'difficulty.dart';
 
 class Task extends StatefulWidget {

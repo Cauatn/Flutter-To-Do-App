@@ -17,7 +17,7 @@ class TaskInherited extends InheritedWidget {
     double total = 0;
 
     for (int i = 0; i < taskList.length; i++) {
-      total += taskList[i].nivel * (taskList[i].dificuldade / 1);
+      total += taskList[i].nivel * (taskList[i].dificuldade / 10);
     }
     return total;
   }
