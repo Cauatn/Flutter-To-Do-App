@@ -1,5 +1,14 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
     "cmake.configureOnOpen": true,
-    "cmake.sourceDirectory": "C:/Users/tavar/source/projects_root/flutter_alura/linux"
+    "cmake.sourceDirectory": "C:/Users/tavar/source/projects_root/flutter_alura/linux",
+
+  "apc.menubar.compact": true,
+  "apc.statusBar": {
+    "height": 28,
+    "position": "editor-bottom",
+  },
+      "apc.electron": {
+        "frame": false,
+      }
 }
